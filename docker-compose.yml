@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Mikrocosmos1247
+      MYSQL_DATABASE: Practica2
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
